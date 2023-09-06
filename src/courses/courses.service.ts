@@ -9,7 +9,7 @@ export class CoursesService {
             id: 1,
             name: "Fundamentos do NestJs",
             descripition: "Fundamentos do NestJs",
-            tasgs: ["node", "nest"]
+            tags: ["node", "nest"]
         }
     ]
 
