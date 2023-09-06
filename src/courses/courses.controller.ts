@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Res } from '@nestjs/common';
 
 @Controller('courses')
 export class CoursesController {
@@ -17,5 +17,16 @@ export class CoursesController {
     @HttpCode(HttpStatus.NO_CONTENT) // Estatico.
     create(@Body('name') body) {
         return body
+    }
+
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() body) {
+        return `Atualização do Curso #${id}`
+    }
+
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return `Deletando o curso #${id}`
     }
 }
