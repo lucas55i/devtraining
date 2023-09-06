@@ -20,9 +20,9 @@ export class CoursesService {
     findOne(id: string) {
         return this.courses.find((couser) => couser.id === Number(id));
     }
-
+    
     create(createCourseDto: any) {
-        this.courses.push(createCourseDto)
+        this.courses.push(createCourseDto);
     }
 
     update(id: string, updateCourseDto: any) {
