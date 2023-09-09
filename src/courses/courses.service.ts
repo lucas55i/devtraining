@@ -1,17 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Course } from './entities/course.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CoursesService {
-
-    private courses: Course[] = [
-        {
-            id: 1,
-            name: "Fundamentos do NestJs",
-            description: "Fundamentos do NestJs",
-            tags: ["node", "nest"]
-        }
-    ]
+    constructor(
+        @InjectRepository(Course)
+        private readonly courseRepository: Repository<Course>
+    ) { }
 
     findAll() {
         return this.courses
