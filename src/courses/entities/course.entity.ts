@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { TagEnity } from "./tag.enity";
+import { TagEntity } from "./tag.enity";
 
 @Entity("courses")
 export class Course {
@@ -13,6 +13,6 @@ export class Course {
     description: string;
 
     @JoinTable()
-    @ManyToMany((type) => TagEnity, (tag) => tag.cousers)
+    @ManyToMany((type) => TagEntity, (tag) => tag.cousers)
     tags: string[];
 }
