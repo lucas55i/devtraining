@@ -22,14 +22,15 @@ export class CoursesService {
         })
     }
 
-    findOne(id: string) {
-        const course = this.courseRepository.findOne(id, {
+    async findOne(id: string) {
+        const course = await this.courseRepository.findOne(id, {
             relations: ["tags"]
         })
         if (!course) {
-            throw new NotFoundException(`Course ID ${id} não existe`)
-        }
-        return course
+            throw new NotFoundException(`Course ID ${id} not found`);
+          }
+      
+          return course;
     }
 
     async create(createCourseDto: CreateCourseDto) {
