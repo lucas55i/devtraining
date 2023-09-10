@@ -28,15 +28,28 @@ export class CoursesService {
         return course
     }
 
-    create(createCourseDto: CreateCourseDto) {
-        const courses = this.courseRepository.create(createCourseDto);
+    async create(createCourseDto: CreateCourseDto) {
+        const tags = await Promise.all(
+            createCourseDto.tags.map(name => this.preloadTagByName(name))
+        )
+        const courses = this.courseRepository.create({
+            ...createCourseDto,
+            tags,
+        });
         return this.courseRepository.save(courses);
     }
 
     async update(id: string, updateCourseDto: UpdateCourseDto) {
+        const tags = 
+         updateCourseDto.tags && 
+         (await Promise.all(
+            updateCourseDto.tags.map(name => this.preloadTagByName(name))
+         ));
+
         const course = await this.courseRepository.preload({
             id: +id,
             ...updateCourseDto,
+            tags,
         })
 
         if (!course) {
