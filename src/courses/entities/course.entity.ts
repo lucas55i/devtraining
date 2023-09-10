@@ -13,6 +13,8 @@ export class Course {
     description: string;
 
     @JoinTable()
-    @ManyToMany((type) => TagEntity, (tag) => tag.cousers)
+    @ManyToMany((type) => TagEntity, (tag) => tag.cousers, {
+        cascade: true
+    })
     tags: string[];
 }
