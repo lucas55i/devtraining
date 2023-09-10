@@ -1,4 +1,3 @@
-import { type } from "os";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TagEnity } from "./tag.enity";
 
