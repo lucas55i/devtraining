@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { TagEntity } from "./tag.enity";
+import { TagEntity } from "./tag.entity";
 
 @Entity("courses")
 export class Course {
