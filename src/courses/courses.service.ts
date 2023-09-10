@@ -56,4 +56,14 @@ export class CoursesService {
         return this.courseRepository.remove(course)
     }
 
+    private async preloadTagByName(name: string): Promise<TagEntity> {
+        const tag = await this.tagRepository.findOne({ name });
+
+        if (tag) {
+            return tag
+        }
+
+        return this.tagRepository.create({ name });
+    }
+
 }
