@@ -9,7 +9,6 @@ export class TagEntity {
     @Column()
     name: string;
 
-    // @Column()
-    @ManyToMany((type) => Course, (course) => course.tags)
+    @ManyToMany(() => Course, (course: Course) => course.tags)
     cousers: Course[];
 }
