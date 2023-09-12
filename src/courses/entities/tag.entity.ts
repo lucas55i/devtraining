@@ -3,7 +3,7 @@ import { Course } from "./course.entity";
 import { v4 as uuid } from "uuid";
 
 @Entity("tags")
-export class TagEntity {
+export class Tag {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
