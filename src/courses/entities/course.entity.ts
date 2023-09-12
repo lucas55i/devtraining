@@ -1,5 +1,5 @@
 import { BeforeInsert, Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { TagEntity } from "./tag.entity";
+import { Tag } from "./tag.entity";
 import { v4 as uuid } from "uuid";
 
 @Entity("courses")
@@ -14,11 +14,11 @@ export class Course {
     @Column()
     description: string;
 
-    @JoinTable()
-    @ManyToMany(() => TagEntity, (tag: TagEntity) => tag.cousers, {
+    @JoinTable({name: "courses_tags"})
+    @ManyToMany(() => Tag, (tag: Tag) => tag.cousers, {
         cascade: true
     })
-    tags: TagEntity[];
+    tags: Tag[];
     
     @CreateDateColumn({ type: "timestamp" })
     created_att: Date;
