@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { TagEntity } from './entities/tag.entity';
+import { Tag } from './entities/tag.entity';
 
 @Injectable()
 export class CoursesService {
@@ -12,8 +12,8 @@ export class CoursesService {
         @InjectRepository(Course)
         private readonly courseRepository: Repository<Course>,
 
-        @InjectRepository(TagEntity)
-        private readonly tagRepository: Repository<TagEntity>
+        @InjectRepository(Tag)
+        private readonly tagRepository: Repository<Tag>
     ) { }
 
     findAll() {
@@ -74,7 +74,7 @@ export class CoursesService {
         return this.courseRepository.remove(course)
     }
 
-    private async preloadTagByName(name: string): Promise<TagEntity> {
+    private async preloadTagByName(name: string): Promise<Tag> {
         const tag = await this.tagRepository.findOne({ name });
 
         if (tag) {
