@@ -1,10 +1,10 @@
 module.exports = {
     type: 'postgres',
-    host: 'db',
+    host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: 'docker',
-    database: 'cursonestjs',
+    database: 'postgres',
     entities: ['dist/**/*.entity.js'],
     migrations: ['dist/migrations/*.js'],
     cli: {
