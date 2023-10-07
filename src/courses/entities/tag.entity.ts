@@ -1,26 +1,33 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Course } from "./course.entity";
-import { v4 as uuid } from "uuid";
+import {
+  BeforeInsert,
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Course } from './course.entity';
+import { v4 as uuid } from 'uuid';
 
-@Entity("tags")
+@Entity('tags')
 export class Tag {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @ManyToMany(() => Course, (course: Course) => course.tags)
-    cousers: Course[];
+  @ManyToMany(() => Course, (course: Course) => course.tags)
+  cousers: Course[];
 
-    @CreateDateColumn({ type: "timestamp" })
-    created_att: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  created_att: Date;
 
-    @BeforeInsert()
-    generatedId() {
-        if (this.id){
-            return;
-        }
-        this.id = uuid()
+  @BeforeInsert()
+  generatedId() {
+    if (this.id) {
+      return;
     }
+    this.id = uuid();
+  }
 }

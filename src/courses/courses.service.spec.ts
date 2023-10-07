@@ -9,20 +9,23 @@ import { NotFoundException } from '@nestjs/common';
 type MockRepository<T = any> = Partial<Record<keyof Repository<T>, jest.Mock>>;
 
 const createMockRepository = <T = any>(): MockRepository<T> => ({
-  findOne: jest.fn()
-})
+  findOne: jest.fn(),
+});
 
 describe('CoursesService', () => {
   let service: CoursesService;
-  let couserRepository: MockRepository
+  let couserRepository: MockRepository;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         CoursesService,
         { provide: Connection, useValue: {} },
-        { provide: getRepositoryToken(Course), useValue: createMockRepository() },
-        { provide: getRepositoryToken(Tag), useValue: createMockRepository() }
+        {
+          provide: getRepositoryToken(Course),
+          useValue: createMockRepository(),
+        },
+        { provide: getRepositoryToken(Tag), useValue: createMockRepository() },
       ],
     }).compile();
 
@@ -37,25 +40,24 @@ describe('CoursesService', () => {
   describe('findOne', () => {
     describe('buscar curso por ID', () => {
       it('deve retornar o objeto Course', async () => {
-        const courseId = '1'
-        const expectedCourse = {}
+        const courseId = '1';
+        const expectedCourse = {};
 
-        couserRepository.findOne.mockReturnValue(expectedCourse)
-        const course = await service.findOne(courseId)
-        expect(course).toEqual(expectedCourse)
-      })
+        couserRepository.findOne.mockReturnValue(expectedCourse);
+        const course = await service.findOne(courseId);
+        expect(course).toEqual(expectedCourse);
+      });
 
       it('deve retornar NotFoundException', async () => {
-        const courseId = '1'
-        couserRepository.findOne.mockReturnValue(undefined)
+        const courseId = '1';
+        couserRepository.findOne.mockReturnValue(undefined);
 
         try {
-          await service.findOne(courseId)
+          await service.findOne(courseId);
+        } catch (error) {
+          expect(error).toBeInstanceOf(NotFoundException);
         }
-        catch (error) {
-          expect(error).toBeInstanceOf(NotFoundException)
-        }
-      })
-    })
+      });
+    });
   });
 });
